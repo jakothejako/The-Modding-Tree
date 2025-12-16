@@ -1,13 +1,13 @@
 let modInfo = {
-	name: "The AHHHAHAHAHHA Tree",
+	name: "The consumerism Tree",
 	author: "JAKOB JEFSEN",
-	pointsName: "points",
+	pointsName: "Dollars",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
+	offlineLimit: 0,  // In hours
 }
 
 // Set your version in num and name
@@ -41,7 +41,14 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0.1)
+	if (hasUpgrade('c', 11)) gain = gain.times(2)
+
+	if (hasUpgrade('c', 12)) gain = gain.times(5)
+	if (hasUpgrade('s', 11)) gain = gain.times(2)
+
+	if (hasUpgrade('s', 12)) gain = gain.times(5)
+
 	return gain
 }
 
